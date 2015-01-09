@@ -56,6 +56,17 @@ $(function() {
 
     /* TODO: Write a new test suite named "The menu" */
     describe("The menu", function() {
+        var clickMenuIcon, clickMenu = null;
+        var menuHidden = false;
+        beforeEach( function() {
+            menuHidden = $('body').hasClass('menu-hidden');
+            clickMenuIcon = {
+                clickMenu: function() {
+                    $('body').toggleClass('menu-hidden');
+                }
+            };
+            //spyOn(clickMenuIcon, 'clickMenu');
+        });
 
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
@@ -63,17 +74,23 @@ $(function() {
          * hiding/showing of the menu element.
          */
         it("hidden by default", function() {
-            expect(true).toBe(true);
+            var isHidden = false;
+            isHidden = $('body').hasClass('menu-hidden');
+            expect(isHidden).toBe(true);
         });
 
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
-        // it("changes visibility", function() {
-        //     expect(true).toBe(true);
-        // });
+        /* TODO: Write a test that ensures the menu changes
+         * visibility when the menu icon is clicked. This test
+         * should have two expectations: does the menu display when
+         * clicked and does it hide when clicked again.
+         */
+         //don't understand how to track when the menu icon is clicked, don't know if this requires using a spy
+        it("changes visibility", function() {
+            clickMenuIcon.clickMenu(); //simulates user clicking menu icon for the first time
+            expect(menuHidden).toBe(false); //menu should display
+            clickMenuIcon.clickMenu(); //simulates user clicking menu icon 2nd time
+            expect(menuHidden).toBe(true); //menu should be hidden
+        });
     });
 
     /* TODO: Write a new test suite named "Initial Entries" */
