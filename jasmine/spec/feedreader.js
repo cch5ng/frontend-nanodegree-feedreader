@@ -105,26 +105,28 @@ $(function() {
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe("New Feed Selection", function() {
         var entryInitial = null;
-        //var entryCurrent = null;
+        var entryCurrent = null;
+
         beforeEach(function(done) {
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000; //increased from default value to avoid async callback timeouts
+            entryInitial = document.querySelectorAll('.entry').item(0).innerHTML;
             setTimeout(function() {
-                entryInitial = document.querySelectorAll('.entry').item(0).innerHTML;
-                console.log('entryInitial: ' + entryInitial);
                 loadFeed(1);
                 done();
             }, 3000);
         });
+
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
         it("new loadFeed changes content", function(done) {
-            //expect(document.querySelectorAll('.entry').item(0).innerHTML).not.toContain('<h2>How to Back Up Your WordPress Database</h2>');
-            entryCurrent = document.querySelectorAll('.entry').item(0).innerHTML;
-            console.log('entryCurrent: ' + entryCurrent);
-            expect(entryInitial).not.toContain(entryCurrent);
-            done();
+            setTimeout(function() {
+                entryCurrent = document.querySelectorAll('.entry').item(0).innerHTML; //updated entry
+                expect(entryInitial).not.toContain(entryCurrent);
+                done();
+            }, 5000); //set a longer timeout to ensure that the updated entry was captured
         });
     });
 }());
