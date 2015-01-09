@@ -26,7 +26,6 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
@@ -38,7 +37,6 @@ $(function() {
             }
             allFeeds.forEach(checkUrl);
         });
-
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
@@ -82,6 +80,10 @@ $(function() {
 
     /* TODO: Write a new test suite named "Initial Entries" */
     describe("Initial Entries", function() {
+
+        /**
+         * Setup loads the Udacity blog RSS feed.
+         */
         beforeEach(function(done) {
             setTimeout(function() {
                 loadFeed(0);
@@ -107,6 +109,9 @@ $(function() {
         var entryInitial = null;
         var entryCurrent = null;
 
+        /**
+         * Setup loads the CSS Tricks RSS feed to simulate updating the default feed (Udacity blog).
+         */
         beforeEach(function(done) {
             jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000; //increased from default value to avoid async callback timeouts
             entryInitial = document.querySelectorAll('.entry').item(0).innerHTML;
@@ -115,7 +120,6 @@ $(function() {
                 done();
             }, 3000);
         });
-
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
