@@ -53,7 +53,6 @@ $(function() {
         });
     });
 
-
     /* TODO: Write a new test suite named "The menu" */
     describe("The menu", function() {
         /* TODO: Write a test that ensures the menu element is
@@ -82,6 +81,13 @@ $(function() {
     });
 
     /* TODO: Write a new test suite named "Initial Entries" */
+    describe("Initial Entries", function() {
+        beforeEach(function(done) {
+            setTimeout(function() {
+                loadFeed(0);
+                done();
+            }, 3000);
+        });
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -89,11 +95,36 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+        it("loadFeed adds entry", function(done) {
+            var entries = document.querySelectorAll('.entry');
+            expect(entries.length).toBeGreaterThan(0);
+            done();
+        });
+    });
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+    /* TODO: Write a new test suite named "New Feed Selection" */
+    describe("New Feed Selection", function() {
+        var entryInitial = null;
+        //var entryCurrent = null;
+        beforeEach(function(done) {
+            setTimeout(function() {
+                entryInitial = document.querySelectorAll('.entry').item(0).innerHTML;
+                console.log('entryInitial: ' + entryInitial);
+                loadFeed(1);
+                done();
+            }, 3000);
+        });
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        it("new loadFeed changes content", function(done) {
+            //expect(document.querySelectorAll('.entry').item(0).innerHTML).not.toContain('<h2>How to Back Up Your WordPress Database</h2>');
+            entryCurrent = document.querySelectorAll('.entry').item(0).innerHTML;
+            console.log('entryCurrent: ' + entryCurrent);
+            expect(entryInitial).not.toContain(entryCurrent);
+            done();
+        });
+    });
 }());
