@@ -56,18 +56,6 @@ $(function() {
 
     /* TODO: Write a new test suite named "The menu" */
     describe("The menu", function() {
-        var clickMenuIcon, clickMenu = null;
-        var menuHidden = false;
-        beforeEach( function() {
-            menuHidden = $('body').hasClass('menu-hidden');
-            clickMenuIcon = {
-                clickMenu: function() {
-                    $('body').toggleClass('menu-hidden');
-                }
-            };
-            //spyOn(clickMenuIcon, 'clickMenu');
-        });
-
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
@@ -84,12 +72,12 @@ $(function() {
          * should have two expectations: does the menu display when
          * clicked and does it hide when clicked again.
          */
-         //don't understand how to track when the menu icon is clicked, don't know if this requires using a spy
         it("changes visibility", function() {
-            clickMenuIcon.clickMenu(); //simulates user clicking menu icon for the first time
-            expect(menuHidden).toBe(false); //menu should display
-            clickMenuIcon.clickMenu(); //simulates user clicking menu icon 2nd time
-            expect(menuHidden).toBe(true); //menu should be hidden
+            var menuIcon = $('.menu-icon-link');
+            menuIcon.click();
+            expect($('body').hasClass('menu-hidden')).toBe(false); //menu should display
+            menuIcon.click();
+            expect($('body').hasClass('menu-hidden')).toBe(true); //menu should be hidden
         });
     });
 
